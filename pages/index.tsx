@@ -1,86 +1,121 @@
-import type { NextPage } from 'next'
-import Head from 'next/head'
-import Image from 'next/image'
+import type { NextPage } from "next";
+import React, { useEffect, useState } from "react";
+import Head from "next/head";
+import Image from "next/image";
+import axios from "axios";
+import { Pokemon } from "pokenode-ts";
+import Footer from "../components/Footer";
+import { getTypeColor } from "../utils";
 
-const Home: NextPage = () => {
+const Home: NextPage<{ data: Pokemon }> = () => {
+  const [pokemon, setPokemon] = useState<Pokemon | null>(null);
+
+  useEffect(() => {
+    generatePokemon();
+  }, []);
+
+  const generatePokemon = async () => {
+    const randomNum = () => Math.floor(Math.random() * 905 + 1);
+    const pokemon = await axios.get(
+      `https://pokeapi.co/api/v2/pokemon/${randomNum()}`
+    );
+    setPokemon(pokemon.data as Pokemon);
+  };
+
   return (
-    <div className="flex min-h-screen flex-col items-center justify-center py-2">
+    <div className="flex min-h-screen text-white bg-black flex-col items-center justify-center py-2">
       <Head>
-        <title>Create Next App</title>
+        <title>Random Pok&eacute;mon Generator</title>
         <link rel="icon" href="/favicon.ico" />
       </Head>
 
-      <main className="flex w-full flex-1 flex-col items-center justify-center px-20 text-center">
-        <h1 className="text-6xl font-bold">
-          Welcome to{' '}
-          <a className="text-blue-600" href="https://nextjs.org">
-            Next.js!
-          </a>
-        </h1>
+      <main className="flex w-full flex-col items-center p-10 justify-center text-center">
+        <header>
+          <h1 className="text-4xl mb-2 md:text-6xl font-extrabold text-transparent bg-clip-text bg-gradient-to-r from-rose-400 via-fuchsia-500 to-indigo-500">
+            Random Pok&eacute;mon Generator
+          </h1>
+          <p className="font-extrabold text-transparent text-xs bg-clip-text bg-gradient-to-r from-pink-500 via-red-500 to-yellow-500">
+            Regions included: Kanto - Johto - Hoenn - Sinnoh - Unova - Kalos -
+            Alola - Galar/Hisui
+          </p>
+        </header>
 
-        <p className="mt-3 text-2xl">
-          Get started by editing{' '}
-          <code className="rounded-md bg-gray-100 p-3 font-mono text-lg">
-            pages/index.tsx
-          </code>
-        </p>
+        {pokemon && (
+          <div className="my-3 rounded-lg flex space-x-10 justify-center items-center px-8 py-3">
+            <Image
+              src={pokemon.sprites.front_default || ""}
+              width={100}
+              height={100}
+              alt={pokemon.name}
+            />
+            <div className="flex flex-col space-y-3 text-sm text-left">
+              <div className="flex flex-col">
+                <span className="capitalize text-4xl font-semibold text-transparent bg-clip-text bg-gradient-to-r from-rose-400 to-orange-300">
+                  {pokemon.name}
+                </span>
+                <span>Index: #{pokemon.id}</span>
+              </div>
 
-        <div className="mt-6 flex max-w-4xl flex-wrap items-center justify-around sm:w-full">
-          <a
-            href="https://nextjs.org/docs"
-            className="mt-6 w-96 rounded-xl border p-6 text-left hover:text-blue-600 focus:text-blue-600"
-          >
-            <h3 className="text-2xl font-bold">Documentation &rarr;</h3>
-            <p className="mt-4 text-xl">
-              Find in-depth information about Next.js features and its API.
-            </p>
-          </a>
+              <div>
+                <h3 className="text-lg font-semibold mb-1">Stats</h3>
+                {pokemon.stats.map(({ stat, base_stat }, index) => (
+                  <div className="capitalize" key={index}>
+                    <span>{stat.name}:</span> {base_stat}
+                  </div>
+                ))}
+              </div>
 
-          <a
-            href="https://nextjs.org/learn"
-            className="mt-6 w-96 rounded-xl border p-6 text-left hover:text-blue-600 focus:text-blue-600"
-          >
-            <h3 className="text-2xl font-bold">Learn &rarr;</h3>
-            <p className="mt-4 text-xl">
-              Learn about Next.js in an interactive course with quizzes!
-            </p>
-          </a>
+              <div>
+                <h3 className="text-lg font-semibold mb-1">Abilities</h3>
+                {pokemon.abilities.map(({ ability }) => (
+                  <div className="capitalize">
+                    <span>{ability.name}</span>
+                  </div>
+                ))}
+              </div>
 
-          <a
-            href="https://github.com/vercel/next.js/tree/canary/examples"
-            className="mt-6 w-96 rounded-xl border p-6 text-left hover:text-blue-600 focus:text-blue-600"
-          >
-            <h3 className="text-2xl font-bold">Examples &rarr;</h3>
-            <p className="mt-4 text-xl">
-              Discover and deploy boilerplate example Next.js projects.
-            </p>
-          </a>
+              <div>
+                <h3 className="text-lg font-semibold mb-1">Moves</h3>
+                <div className="max-h-32 overflow-hidden overflow-y-scroll">
+                  {pokemon.moves.map(({ move }) => (
+                    <div className="capitalize">
+                      <span>{move.name}</span>
+                    </div>
+                  ))}
+                </div>
+              </div>
 
-          <a
-            href="https://vercel.com/import?filter=next.js&utm_source=create-next-app&utm_medium=default-template&utm_campaign=create-next-app"
-            className="mt-6 w-96 rounded-xl border p-6 text-left hover:text-blue-600 focus:text-blue-600"
-          >
-            <h3 className="text-2xl font-bold">Deploy &rarr;</h3>
-            <p className="mt-4 text-xl">
-              Instantly deploy your Next.js site to a public URL with Vercel.
-            </p>
-          </a>
-        </div>
+              <div>
+                <h3 className="text-lg font-semibold mb-1">Types</h3>
+                <div className="flex space-x-2">
+                  {pokemon.types.map(({ type }, index) => (
+                    <div
+                      key={index}
+                      className="capitalize rounded-lg p-2 w-20"
+                      style={{
+                        backgroundColor: getTypeColor(type.name),
+                      }}
+                    >
+                      <span>{type.name}</span>
+                    </div>
+                  ))}
+                </div>
+              </div>
+            </div>
+          </div>
+        )}
+
+        <button
+          onClick={generatePokemon}
+          className="px-4 py-3 rounded-md text-sm mt-3 bg-gradient-to-r from-rose-400 via-fuchsia-500 to-indigo-500 hover:scale-105 transition duration-300 ease-in-out"
+        >
+          Generate New Pok&eacute;mon
+        </button>
       </main>
 
-      <footer className="flex h-24 w-full items-center justify-center border-t">
-        <a
-          className="flex items-center justify-center gap-2"
-          href="https://vercel.com?utm_source=create-next-app&utm_medium=default-template&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Powered by{' '}
-          <Image src="/vercel.svg" alt="Vercel Logo" width={72} height={16} />
-        </a>
-      </footer>
+      <Footer />
     </div>
-  )
-}
+  );
+};
 
-export default Home
+export default Home;
