@@ -200,7 +200,7 @@ const About: NextPage = () => {
             generate?
           </h2>
           <p>
-            There is no limit on the number of Pokemon you can generate using
+            There is no limit on the number of Pok&eacute;mon you can generate using
             the Random Pok&eacute;mon Generator app. You can generate as many
             Pok&eacute;mon as you like.
           </p>
