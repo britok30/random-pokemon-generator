@@ -41,7 +41,7 @@ const Home: NextPage<{ data: Pokemon }> = () => {
         </header>
 
         {pokemon && (
-          <div className="my-3 rounded-lg flex space-x-10 justify-center items-center px-8 py-3">
+          <div className="my-3 rounded-lg flex space-x-10 justify-center items-center px-6 py-3">
             <Image
               src={pokemon.sprites.front_default || ""}
               width={100}
@@ -55,50 +55,51 @@ const Home: NextPage<{ data: Pokemon }> = () => {
                 </span>
                 <span>Index: #{pokemon.id}</span>
               </div>
-
-              <div>
-                <h3 className="text-lg font-semibold mb-1">Stats</h3>
-                {pokemon.stats.map(({ stat, base_stat }, index) => (
-                  <div className="capitalize" key={index}>
-                    <span>{stat.name}:</span> {base_stat}
-                  </div>
-                ))}
-              </div>
-
-              <div>
-                <h3 className="text-lg font-semibold mb-1">Abilities</h3>
-                {pokemon.abilities.map(({ ability }) => (
-                  <div className="capitalize">
-                    <span>{ability.name}</span>
-                  </div>
-                ))}
-              </div>
-
-              <div>
-                <h3 className="text-lg font-semibold mb-1">Moves</h3>
-                <div className="max-h-32 overflow-hidden overflow-y-scroll">
-                  {pokemon.moves.map(({ move }) => (
-                    <div className="capitalize">
-                      <span>{move.name}</span>
+              <div className="flex flex-col space-y-5 md:flex-row md:space-x-5">
+                <div>
+                  <h3 className="text-lg font-semibold">Stats</h3>
+                  {pokemon.stats.map(({ stat, base_stat }, index) => (
+                    <div className="capitalize" key={index}>
+                      <span>{stat.name}:</span> {base_stat}
                     </div>
                   ))}
                 </div>
-              </div>
 
-              <div>
-                <h3 className="text-lg font-semibold mb-1">Types</h3>
-                <div className="flex space-x-2">
-                  {pokemon.types.map(({ type }, index) => (
-                    <div
-                      key={index}
-                      className="capitalize rounded-lg p-2 w-20"
-                      style={{
-                        backgroundColor: getTypeColor(type.name),
-                      }}
-                    >
-                      <span>{type.name}</span>
+                <div>
+                  <h3 className="text-lg font-semibold">Abilities</h3>
+                  {pokemon.abilities.map(({ ability }) => (
+                    <div className="capitalize">
+                      <span>{ability.name}</span>
                     </div>
                   ))}
+                </div>
+
+                <div>
+                  <h3 className="text-lg font-semibold">Moves</h3>
+                  <div className="max-h-[12rem] w-[10rem] overflow-hidden overflow-y-scroll border p-2 scrollbar-thin scrollbar-thumb-red-700 scrollbar-track-gray-700">
+                    {pokemon.moves.map(({ move }) => (
+                      <div className="capitalize">
+                        <span>{move.name}</span>
+                      </div>
+                    ))}
+                  </div>
+                </div>
+
+                <div>
+                  <h3 className="text-lg font-semibold">Types</h3>
+                  <div className="flex flex-col space-y-2">
+                    {pokemon.types.map(({ type }, index) => (
+                      <div
+                        key={index}
+                        className="capitalize rounded-lg p-2 w-20"
+                        style={{
+                          backgroundColor: getTypeColor(type.name),
+                        }}
+                      >
+                        <span>{type.name}</span>
+                      </div>
+                    ))}
+                  </div>
                 </div>
               </div>
             </div>
@@ -107,7 +108,7 @@ const Home: NextPage<{ data: Pokemon }> = () => {
 
         <button
           onClick={generatePokemon}
-          className="px-4 py-3 rounded-md text-sm mt-3 bg-gradient-to-r from-rose-400 via-fuchsia-500 to-indigo-500 hover:scale-105 transition duration-300 ease-in-out"
+          className="px-4 py-3 rounded-md text-sm mt-8 bg-gradient-to-r from-rose-400 via-fuchsia-500 to-indigo-500 hover:scale-105 transition duration-300 ease-in-out"
         >
           Generate New Pok&eacute;mon
         </button>
