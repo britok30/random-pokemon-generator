@@ -149,8 +149,9 @@ const About: NextPage = () => {
             The random Pok&eacute;mon generator works by selecting a
             Pok&eacute;mon at random from the entire pool of known
             Pok&eacute;mon species. When the generator is used, it will display
-            the name and image of the randomly selected Pok&eacute;mon, abilities, as well
-            as details about its type and other characteristics.
+            the name and image of the randomly selected Pok&eacute;mon,
+            abilities, as well as details about its type and other
+            characteristics.
           </p>
           <h2 className="font-bold text-lg">
             Q: How can I use the random Pok&eacute;mon generator?
@@ -181,6 +182,46 @@ const About: NextPage = () => {
             competitive play, players typically choose their Pok&eacute;mon and
             movesets carefully based on strategy and synergy with their team,
             rather than relying on chance.
+          </p>
+          <h2 className="font-bold text-lg">Q: Is the app free to use?</h2>
+          <p>
+            Yes, the Random Pok&eacute;mon Generator app is completely free to
+            use.
+          </p>
+          <h2 className="font-bold text-lg">
+            Q: Are all Pok&eacute;mon available to generate?
+          </h2>
+          <p>
+            Yes, all Pok&eacute;mon from the main series games are available to
+            generate, including legendary and mythical Pok&eacute;mon.
+          </p>
+          <h2 className="font-bold text-lg">
+            Q: Are there any limitations on how many Pok&eacute;mon I can
+            generate?
+          </h2>
+          <p>
+            There is no limit on the number of Pokemon you can generate using
+            the Random Pok&eacute;mon Generator app. You can generate as many
+            Pok&eacute;mon as you like.
+          </p>
+          <h2 className="font-bold text-lg">Q: Is the app mobile-friendly?</h2>
+          <p>
+            Yes, the Random Pok&eacute;mon Generator app is fully responsive and
+            works on all devices, including smartphones and tablets.
+          </p>
+          <h2 className="font-bold text-lg">Q: Is the app safe to use?</h2>
+          <p>
+            Yes, the Random Pok&eacute;mon Generator app is safe to use. It does
+            not collect any personal information or data and does not contain
+            any malicious software or viruses.
+          </p>
+          <h2 className="font-bold text-lg">
+            Q: Is the app regularly updated?
+          </h2>
+          <p>
+            Yes, the Random Pok&eacute;mon Generator app is regularly updated
+            with new features and improvements. Be sure to check back often for
+            the latest updates.
           </p>
         </div>
       </main>
