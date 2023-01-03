@@ -6,6 +6,7 @@ import axios from "axios";
 import { Pokemon } from "pokenode-ts";
 import Footer from "../components/Footer";
 import { getTypeColor } from "../utils";
+import { Seo } from "../components/Seo";
 
 const Home: NextPage<{ data: Pokemon }> = () => {
   const [pokemon, setPokemon] = useState<Pokemon | null>(null);
@@ -24,10 +25,7 @@ const Home: NextPage<{ data: Pokemon }> = () => {
 
   return (
     <div className="flex min-h-screen text-white bg-black flex-col items-center justify-center py-2">
-      <Head>
-        <title>Random Pok&eacute;mon Generator</title>
-        <link rel="icon" href="/favicon.ico" />
-      </Head>
+      <Seo />
 
       <main className="flex w-full flex-col items-center p-10 justify-center text-center">
         <header>
