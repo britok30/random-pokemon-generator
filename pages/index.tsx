@@ -7,6 +7,7 @@ import { Pokemon } from "pokenode-ts";
 import Footer from "../components/Footer";
 import { getTypeColor } from "../utils";
 import { Seo } from "../components/Seo";
+import { NextSeo } from "next-seo";
 
 const Home: NextPage<{ data: Pokemon }> = () => {
   const [pokemon, setPokemon] = useState<Pokemon | null>(null);
@@ -25,7 +26,35 @@ const Home: NextPage<{ data: Pokemon }> = () => {
 
   return (
     <div className="flex min-h-screen text-white bg-black flex-col items-center justify-center py-2">
-      <Seo />
+      <NextSeo
+        title="Random Pokémon Generator"
+        description="Looking for a fun way to discover new Pokémon? Try the Random Pokémon Generator! With just a click of a button, you can generate a random Pokémon from the entire Pokédex. Whether you're a hardcore trainer or a casual fan, the Random Pokémon Generator is sure to provide endless entertainment. Give it a try today!"
+        canonical="https://randompokemongenerator.dev"
+        openGraph={{
+          url: "https://www.randompokemongenerator.dev",
+          title: "Random Pokémon Generator",
+          description:
+            "Looking for a fun way to discover new Pokémon? Try the Random Pokémon Generator! With just a click of a button, you can generate a random Pokémon from the entire Pokédex. Whether you're a hardcore trainer or a casual fan, the Random Pokémon Generator is sure to provide endless entertainment. Give it a try today!",
+          images: [
+            {
+              url: "https://randompokemongenerator.dev/pokemon.png",
+            },
+          ],
+          siteName: "Random Pokémon Generator",
+        }}
+        twitter={{
+          handle: "@britoszn",
+          site: "@britoszn",
+          cardType: "summary_large_image",
+        }}
+        additionalMetaTags={[
+          {
+            name: "keywords",
+            content:
+              "random pokemon generator, pokemon randomizer, random pokemon, pokemon generator, random pokemon picker, pokemon random",
+          },
+        ]}
+      />
 
       <main className="flex w-full flex-col items-center p-10 justify-center text-center">
         <header>
@@ -65,8 +94,8 @@ const Home: NextPage<{ data: Pokemon }> = () => {
 
                 <div>
                   <h3 className="text-lg font-semibold">Abilities</h3>
-                  {pokemon.abilities.map(({ ability }) => (
-                    <div className="capitalize">
+                  {pokemon.abilities.map(({ ability }, index) => (
+                    <div className="capitalize" key={index}>
                       <span>{ability.name}</span>
                     </div>
                   ))}
@@ -75,8 +104,8 @@ const Home: NextPage<{ data: Pokemon }> = () => {
                 <div>
                   <h3 className="text-lg font-semibold">Moves</h3>
                   <div className="max-h-[12rem] w-[10rem] overflow-hidden overflow-y-scroll border p-2 scrollbar-thin scrollbar-thumb-red-700 scrollbar-track-gray-700">
-                    {pokemon.moves.map(({ move }) => (
-                      <div className="capitalize">
+                    {pokemon.moves.map(({ move }, index) => (
+                      <div className="capitalize" key={index}>
                         <span>{move.name}</span>
                       </div>
                     ))}

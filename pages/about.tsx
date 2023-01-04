@@ -2,13 +2,41 @@ import type { NextPage } from "next";
 import React from "react";
 import Footer from "../components/Footer";
 import { useRouter } from "next/router";
-import { Seo } from "../components/Seo";
+import { NextSeo } from "next-seo";
 
 const About: NextPage = () => {
   const router = useRouter();
   return (
     <div className="flex min-h-screen text-white bg-black flex-col items-center justify-center py-2">
-      <Seo />
+      <NextSeo
+        title="Random Pokémon Generator"
+        description="Looking for a fun way to discover new Pokémon? Try the Random Pokémon Generator! With just a click of a button, you can generate a random Pokémon from the entire Pokédex. Whether you're a hardcore trainer or a casual fan, the Random Pokémon Generator is sure to provide endless entertainment. Give it a try today!"
+        canonical="https://randompokemongenerator.dev"
+        openGraph={{
+          url: "https://www.randompokemongenerator.dev",
+          title: "Random Pokémon Generator",
+          description:
+            "Looking for a fun way to discover new Pokémon? Try the Random Pokémon Generator! With just a click of a button, you can generate a random Pokémon from the entire Pokédex. Whether you're a hardcore trainer or a casual fan, the Random Pokémon Generator is sure to provide endless entertainment. Give it a try today!",
+          images: [
+            {
+              url: "https://randompokemongenerator.dev/pokemon.png",
+            },
+          ],
+          siteName: "Random Pokémon Generator",
+        }}
+        twitter={{
+          handle: "@britoszn",
+          site: "@britoszn",
+          cardType: "summary_large_image",
+        }}
+        additionalMetaTags={[
+          {
+            name: "keywords",
+            content:
+              "random pokemon generator, pokemon randomizer, random pokemon, pokemon generator, random pokemon picker, pokemon random",
+          },
+        ]}
+      />
 
       <main className="flex w-full flex-1 flex-col items-center justify-center p-10 text-center">
         <button
